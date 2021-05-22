@@ -21,7 +21,7 @@ variable "https" {
 
   validation {
     condition     = var.https.enabled && var.https.certificate_arn == ""
-    error_message = "If https is enabled, certificate arn must be specified"
+    error_message = "If https is enabled, certificate arn must be specified."
   }
 }
 
@@ -43,6 +43,6 @@ variable "network" {
 
 variable "enable_access_logs" {
   description = "Enable this to log all traffic to an s3 bucket"
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }
