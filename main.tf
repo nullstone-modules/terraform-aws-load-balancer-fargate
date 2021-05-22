@@ -3,7 +3,7 @@ resource "aws_lb" "this" {
   internal           = false
   load_balancer_type = "application"
   subnets            = var.network.subnet_ids
-  security_groups    = [aws_security_group.lb[count.index].id]
+  security_groups    = [aws_security_group.lb.id]
   enable_http2       = true
   ip_address_type    = "ipv4"
   tags               = var.tags
@@ -17,7 +17,7 @@ resource "aws_lb" "this" {
 resource "aws_lb_listener" "http" {
   count = var.https.enabled ? 0 : 1
 
-  load_balancer_arn = aws_lb.this[count.index].arn
+  load_balancer_arn = aws_lb.this.arn
   protocol          = "HTTP"
   port              = 80
 
@@ -30,7 +30,7 @@ resource "aws_lb_listener" "http" {
 resource "aws_lb_listener" "http-redirect-to-https" {
   count = var.https.enabled ? 1 : 0
 
-  load_balancer_arn = aws_lb.this[count.index].arn
+  load_balancer_arn = aws_lb.this.arn
   port              = 80
   protocol          = "HTTP"
 
@@ -48,7 +48,7 @@ resource "aws_lb_listener" "http-redirect-to-https" {
 resource "aws_lb_listener" "https" {
   count = var.https.enabled ? 1 : 0
 
-  load_balancer_arn = aws_lb.this[count.index].arn
+  load_balancer_arn = aws_lb.this.arn
   protocol          = "HTTPS"
   port              = 443
   ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
