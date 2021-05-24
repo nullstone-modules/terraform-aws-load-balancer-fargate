@@ -18,11 +18,6 @@ variable "https" {
     enabled         = false
     certificate_arn = ""
   }
-
-  validation {
-    condition     = var.https.enabled && var.https.certificate_arn == ""
-    error_message = "If https is enabled, certificate arn must be specified."
-  }
 }
 
 variable "service" {
