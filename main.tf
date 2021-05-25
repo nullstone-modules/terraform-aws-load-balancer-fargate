@@ -70,7 +70,8 @@ resource "aws_lb_target_group" "this" {
   tags                 = var.tags
 
   health_check {
-    // TODO: Allowing any HTTP response to imply healthy, expand later
-    matcher = "200-499"
+    enabled = var.health_check.enabled
+    path    = var.health_check.path
+    matcher = var.health_check.matcher
   }
 }

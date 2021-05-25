@@ -41,3 +41,17 @@ variable "enable_access_logs" {
   type        = bool
   default     = false
 }
+
+variable "health_check" {
+  description = "Configuration for health checking the target group attached to the load balancer"
+  type = object({
+    enabled : bool
+    path : string
+    matcher : string
+  })
+  default = {
+    enabled = true
+    path    = "/"
+    matcher = "200-499"
+  }
+}
